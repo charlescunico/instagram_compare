@@ -43,8 +43,12 @@ def load_instagram_json(path)
     data = entry["string_list_data"]&.first
     next unless data
 
+    # followers_1.json → username is in string_list_data[0]["value"]
+    # following.json   → username is in the parent entry's "title"; "value" is absent
     username = data["value"].to_s.strip
+    username = entry["title"].to_s.strip if username.empty?
     href     = data["href"].to_s.strip
+
     hash[username] = href unless username.empty?
   end
 end
