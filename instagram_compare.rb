@@ -13,25 +13,39 @@ def load_instagram_json(path)
 
   raw = JSON.parse(File.read(path))
 
-  # Instagram exports differ by section:
-  #   following.json    → { "relationships_following": [ { "string_list_data": [...] }, ... ] }
-  #   followers_1.json  → [ { "string_list_data": [...] }, ... ]
-  entries =
-    case raw
-    when Array then raw
-    when Hash  then raw.values.first   # unwrap the single top-level key
-    else
-      warn "Error: unexpected JSON structure in #{path}"
-      exit 1
+  # Recursively walk any Hash/Array structure and collect every object that
+  # looks like an Instagram profile entry — i.e. it contains a
+  # "string_list_data" key whose first element has both "value" and "href".
+  # This makes the loader immune to Instagram restructuring the top-level
+  # wrapper (relationships_following, relationships_followers, bare Array, etc.)
+  entries = []
+  collect_entries = ->(node) do
+    case node
+    when Array
+      node.each { |child| collect_entries.call(child) }
+    when Hash
+      if node.key?("string_list_data")
+        entries << node
+      else
+        node.each_value { |child| collect_entries.call(child) }
+      end
     end
+  end
+
+  collect_entries.call(raw)
+
+  if entries.empty?
+    warn "Warning: no profile entries found in #{path}. Raw structure preview:"
+    warn JSON.pretty_generate(raw).lines.first(10).join
+  end
 
   entries.each_with_object({}) do |entry, hash|
-    data = entry.dig("string_list_data")&.first
+    data = entry["string_list_data"]&.first
     next unless data
 
-    username = data["value"]
-    href     = data["href"]
-    hash[username] = href if username && !username.empty?
+    username = data["value"].to_s.strip
+    href     = data["href"].to_s.strip
+    hash[username] = href unless username.empty?
   end
 end
 
