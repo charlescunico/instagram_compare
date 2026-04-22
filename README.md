@@ -1,5 +1,33 @@
 # Instagram followers and following comparison script
 
+**Instructions:**
+
+First you need to export and download your data from Instagram.
+
+**On mobile app:**
+
+Go to your profile → tap the menu ☰ top right
+Tap Accounts Center at the very top
+Tap Your information and permissions
+Tap Download your information
+Select your Instagram account → Next
+Choose Complete copy or Some of your information → Next
+Enter your email → Submit request
+
+**On desktop:**
+
+Go to instagram.com and log in
+Settings → Privacy and security
+Scroll to Data download → Request download
+Confirm email + password 
+Instagram emails you a ZIP file — usually within minutes, but can take up to 48 hours for big accounts. 
+
+**To find who doesn’t follow back:**
+
+Open the ZIP → go to `followers_and_following` folder
+You’ll see `followers_1.json` and `following.json`
+Use the script to compare the two lists.
+
 The script handles both Instagram JSON structures (the `following.json` top-level object vs the bare array in `followers_1.json`) and outputs two clearly labelled lists plus a summary.
 
 **How to run it:**
