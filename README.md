@@ -6,21 +6,21 @@ First you need to export and download your data from Instagram.
 
 **On mobile app:**
 
-Go to your profile → tap the menu ☰ top right
-Tap Accounts Center at the very top
-Tap Your information and permissions
-Tap Download your information
-Select your Instagram account → Next
-Choose Complete copy or Some of your information → Next
-Enter your email → Submit request
+- Go to your profile → tap the menu ☰ top right
+- Tap Accounts Center at the very top
+- Tap Your information and permissions
+- Tap Download your information
+- Select your Instagram account → Next
+- Choose Complete copy or Some of your information → Next
+- Enter your email → Submit request
 
 **On desktop:**
 
-Go to instagram.com and log in
-Settings → Privacy and security
-Scroll to Data download → Request download
-Confirm email + password 
-Instagram emails you a ZIP file — usually within minutes, but can take up to 48 hours for big accounts. 
+- Go to instagram.com and log in
+- Settings → Privacy and security
+- Scroll to Data download → Request download
+- Confirm email + password 
+- Instagram emails you a ZIP file — usually within minutes, but can take up to 48 hours for big accounts. 
 
 **To find who doesn’t follow back:**
 
